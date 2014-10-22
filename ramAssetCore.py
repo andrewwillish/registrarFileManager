@@ -446,7 +446,10 @@ def uploadAsset(name=None, assetType=None, assetTarget=None):
         oldFileNameVar=cmds.getAttr(chk+'.fileTextureName')
         newFileNameVar=textureSavePathVar+'/'+oldFileNameVar[oldFileNameVar.rfind('/')+1:]
         if oldFileNameVar!=newFileNameVar:
-            shutil.copy(oldFileNameVar,newFileNameVar)
+            try:
+                shutil.copy(oldFileNameVar,newFileNameVar)
+            except:
+                pass
         cmds.setAttr(chk+'.fileTextureName',newFileNameVar,type='string')
 
     #saving operation
@@ -484,7 +487,7 @@ def downloadAsset(name=None, assetType=None, assetTarget=None):
     if name==None:raise StandardError, 'error : no asset name specified'
     if assetType==None or assetTarget==None: raise StandardError, 'error : no asset type or target specified'
     if assetTarget==None or assetTarget=='': raise StandardError, 'error : no asset target specified'
-
+    print 'tessssssssssssssssssst'
     #parsing type [0]=CHAR [1]=PROP [2]=SETS
     if assetType==0:
         assetType='CHAR'
@@ -500,6 +503,7 @@ def downloadAsset(name=None, assetType=None, assetTarget=None):
 
     #check if local workspace exists
     workspaceVar = str(os.environ['WINDIR']).replace('\\Windows','')+'/workspace'
+    if os.path.isdir(workspaceVar)==False:os.makedirs(workspaceVar)
 
     #preparing saving path
     #determining timestamp

@@ -56,7 +56,7 @@ class ramAssetUIClass:
         cmds.textScrollList('assetTextScroll',h=340,w=150,sc=self.listLegacyAndPicture)
 
         cmds.columnLayout('brdige',adj=True,p='rowcmas')
-        cmds.frameLayout('f2inp',l='Asset Information',en=False)
+        cmds.frameLayout('f2inp',l='Asset Information',en=True)
         cmds.columnLayout('rrcf2',adj=True, p='f2inp')
         cmds.rowColumnLayout('rrcf22',nc=2, p='rrcf2')
 
@@ -402,7 +402,6 @@ class ramAssetUIClass:
     def populateTable(self,*args):
         #enable field
         cmds.frameLayout('f2inp2',e=True,en=False)
-        cmds.frameLayout('f2inp',e=True,en=False)
         cmds.frameLayout('f4',e=True,en=False)
 
         #clean up
@@ -530,7 +529,6 @@ class ramAssetUIClass:
     def listLegacyAndPicture(self,*args):
         #enable field
         cmds.frameLayout('f2inp2',e=True,en=True)
-        cmds.frameLayout('f2inp',e=True,en=True)
         cmds.frameLayout('f4',e=True,en=True)
 
         #clean up
