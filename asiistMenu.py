@@ -23,3 +23,9 @@ except:
 
 cmds.menuItem('assetManager',l='Asset Manager',p='m_registrarMenu',\
               c=lambda*args: moduleLauncher('assetManager',rootPathVar+'/ramAssetUI.py'))
+cmds.menuItem(divider=True)
+cmds.menuItem('shotSetup',l='Shot Setup',p='m_registrarMenu',\
+              c=lambda*args: moduleLauncher('assetManager',rootPathVar+'/rsmShotSetup.py'))
+cmds.menuItem('shotBuilder',l='Shot Builder',p='m_registrarMenu',\
+              c=lambda*args: moduleLauncher('assetManager',rootPathVar+'/rsmShotBuilder.py'))
+cmds.menuItem(divider=True)
