@@ -22,7 +22,6 @@ try:
     tree=ET.parse(rootPathVar+'/root.xml')
     root=tree.getroot()
     assetRootVar=root[0].text
-    assetRootVar=root[0].text
     sequenceRootVar=root[1].text
 except:
     raise StandardError, 'error : failed to fetch root.xml'
