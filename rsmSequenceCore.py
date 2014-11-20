@@ -148,7 +148,7 @@ def uploadSeq():
     if project!=curProj: raise StandardError, 'Invalid scene project data. Check your project environment.'
 
     #generating data path
-    dataPath = sequenceRootVar+'/'+curProj+'/EPISODES/'+episode+'/'+shot
+    dataPath = sequenceRootVar+'/'+str(curProj)+'/EPISODES/'+str(episode)+'/'+str(shot)
 
     #check data path existence
     if os.path.isdir(dataPath) is False:

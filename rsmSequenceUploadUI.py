@@ -14,8 +14,9 @@ class rsmSequenceUploadUI:
         return
 
     def uploadSeq(self):
+        rsmSequenceCore.uploadSeq()
         try:
-            rsmSequenceCore.uploadSeq()
+            print 'test'
         except Exception as e:
             cmds.confirmDialog(icn='warning',t='Error',m=str(e),button=['Ok'])
         return
