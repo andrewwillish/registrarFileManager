@@ -112,27 +112,24 @@ class shotBuilderCls:
                                   button=['model','shader','rig','Cancel'])
         assetRefPath=assetRefPath+'/'+repVar
 
-        if cmds.objExists('shotMaster'):
-            if repVar!='Cancel':
-                if os.path.isdir(assetRefPath):
-                    for chk in os.listdir(assetRefPath):assetRefPath=assetRefPath+'/'+chk if chk.endswith('.ma')==True else None
+        if repVar!='Cancel':
+            if os.path.isdir(assetRefPath):
+                for chk in os.listdir(assetRefPath):assetRefPath=chk if chk.endswith('.ma')==True else None
 
-                    if assetRefPath!=None:
-                        filename=assetRefPath[assetRefPath.rfind('/')+1:]
-                        refAss=cmds.file(assetRefPath,loadReferenceDepth='all',namespace=filename[:-3],r=True,f=True,mnc=False,gr=True)
-                        curimp=cmds.ls(sl=True)[0]
-                        if curimp.startswith('c_'):
-                            cmds.parent(curimp,'char')
-                        elif curimp.startswith('p_'):
-                            cmds.parent(curimp,'prop')
-                        elif curimp.startswith('s_'):
-                            cmds.parent(curimp,'sets')
-                        else:
-                            cmds.error('PROCEEDINGS ERROR: INVALID ASSET')
-                else:
-                    cmds.confirmDialog(icn='warning',t='Error',message='Asset sub-type non-exists!\n'+assetRefPath,button=['OK'])
-        else:
-            cmds.confirmDialog(icn='warning',t='Error',message='There is no shotMaster',button=['OK'])
+                if assetRefPath!=None:
+                    filename=assetRefPath[assetRefPath.rfind('/')+1:]
+                    refAss=cmds.file(assetRefPath,loadReferenceDepth='all',namespace=filename[:-3],r=True,f=True,mnc=False,gr=True)
+                    curimp=cmds.ls(sl=True)[0]
+                    if curimp.startswith('c_'):
+                        cmds.parent(curimp,'char')
+                    elif curimp.startswith('p_'):
+                        cmds.parent(curimp,'prop')
+                    elif curimp.startswith('s_'):
+                        cmds.parent(curimp,'sets')
+                    else:
+                        cmds.error('PROCEEDINGS ERROR: INVALID ASSET')
+            else:
+                cmds.confirmDialog(icn='warning',t='Error',message='Asset sub-type non-exists!\n'+assetRefPath,button=['OK'])
         return
 
 shotBuilderCls()
