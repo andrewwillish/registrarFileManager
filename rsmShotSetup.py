@@ -52,13 +52,13 @@ class shotSetupCls:
 
         dataHeader=file[file.rfind('/')+1:]
 
+        epsInts = []
         for chk in data:
             chk=chk.replace('\r\n','')
             epsInts.append([chk[:chk.find(':')],chk[chk.find(':')+1:]])
 
         cmds.textScrollList('shotContent',e=True,ra=True)
-        for chk in epsInts:
-            cmds.textScrollList('shotContent',e=True,a=chk[0])
+        for chk in epsInts:cmds.textScrollList('shotContent',e=True,a=chk[0])
 
         cmds.textField('ecfBrowse',e=True,tx=str(file))
         cmds.text('episodeName',e=True,l=file[file.rfind('/')+1:file.rfind('.')])
@@ -74,6 +74,7 @@ class shotSetupCls:
         if selShot==None:
             cmds.confirmDialog(icn='error',t='Error',m='No shot selected!',button=['OK'])
             cmds.error('error : no shot selected')
+
         record=None
         for chk in epsInts:
             if chk[0]==selShot[0]:record=chk
@@ -97,12 +98,22 @@ class shotSetupCls:
         for chk in epsInts:
             if chk[0]==selShot[0]:record=chk
 
+        #implement sequence information
+        enviFetch=asiist.getEnvi()
+        for chk in enviFetch:
+            if chk[0] == 'resWidth': resWidth = chk[1]
+            if chk[0] == 'resHeight': resHeight = chk[1]
+            if chk[0] == 'resAspectRatio': resAspectRatio = chk[1]
+
+        cmds.setAttr('defaultResolution.width', float(resWidth))
+        cmds.setAttr('defaultResolution.height', float(resHeight))
+        cmds.setAttr('defaultResolution.deviceAspectRatio', float(resAspectRatio))
+
         #create empty group
         cmds.group(em=True,n='sceneInfo',p='shotMaster')
         cmds.group(em=True,n='char',p='shotMaster')
         cmds.group(em=True,n='prop',p='shotMaster')
         cmds.group(em=True,n='sets',p='shotMaster')
-        cmds.group(em=True,n='cam',p='shotMaster')
 
         #additional data to sceneInfo
         cmds.select('sceneInfo')
@@ -121,7 +132,7 @@ class shotSetupCls:
         cmds.setAttr('sceneInfo.frameCount',l=True)
 
         #lock standard channel
-        for object in ['shotMaster','sceneInfo','char','prop','sets','cam']:
+        for object in ['shotMaster','sceneInfo','char','prop','sets']:
             for channel in ['tx','ty','tz','rx','ry','rz','sx','sy','sz','visibility']:
                 cmds.setAttr(object+'.'+channel,l=True,cb=False,k=False)
 
