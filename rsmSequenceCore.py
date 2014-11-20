@@ -114,6 +114,24 @@ def playblasting(newTake=False):
         #open playblast file
         os.startfile(genPath+'/'+takeGen+'/playblast/'+episode+'_'+shot+'.mov')
     return
+
+def viewPlayblast(eps=None, shot=None):
+    shotPath = sequenceRootVar+'/'+curProj+'/PLAYBLAST/'+eps
+    for take in os.listdir(shotPath):take = take
+
+    returnSearch = None
+    while take !='0':
+        if not os.path.isfile(shotPath+'/'+take+'/playblast/'+eps+'_'+shot+'.mov'):
+            take = str(int(take)-1)
+            returnSearch = True
+        else:
+            if returnSearch is not None:
+                cmds.confirmDialog(icn='information', t='Previous take',\
+                                   m='There is no latest take for this playblast. Playing take '+str(take)+'.',\
+                                   button=['OK'])
+            os.startfile(shotPath+'/'+take+'/playblast/'+eps+'_'+shot+'.mov')
+            break
+    return
 #playblast function=================================================================================
 
 #sequence uploading function========================================================================

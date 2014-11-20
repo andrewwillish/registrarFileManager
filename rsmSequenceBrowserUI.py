@@ -126,10 +126,12 @@ class rsmSequenceBrowser:
         return
 
     def viewPlayblast(self, *args):
-        cmds.confirmDialog(icn='information',\
-                           t='Information',\
-                           message='Playblast function has not been build just yet',\
-                           button=['Ok'])
+        #get episode and shot data
+        episode=cmds.textScrollList('episodeList', q=True, si=True)[0]
+        shot=cmds.textScrollList('shotList', q=True, si=True)[0]
+
+        #view playblast
+        rsmSequenceCore.viewPlayblast(eps=episode, shot=shot)
         return
 
     def downloadSeq(self, *args):
