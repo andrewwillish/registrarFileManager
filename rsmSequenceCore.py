@@ -327,3 +327,12 @@ def loadLegacy(eps=None, shot=None, file=None):
     cmds.file(winRoot+'/workspace/'+shot+'_'+time+'.ma',o=True)
     return
 #list legacy=========================================================================================
+
+#Render-prep MCC========================================================================================================
+def mccPublishShader(assetName=None, assetType=None):
+    #generate dataPath
+    dataPath = genDataPath(pathType='asset', assetName=assetName, assetType=assetType)
+
+    if os.path.isfile(dataPath+'/shader/conData.xml'): os.remove(dataPath+'/shader/conData.xml')
+    return
+#Render-prep MCC========================================================================================================
