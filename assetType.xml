@@ -1,0 +1,5 @@
+<root>
+    <CHAR>Char contain character object for the main episode series.</CHAR>
+    <PROP>Prop contain the object property on which the character will interact.</PROP>
+    <SETS>Sets contain the environment model for the series.</SETS>
+</root>

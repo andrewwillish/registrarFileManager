@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Autodesk_Cache_File>
+  <cacheType Type="OneFile" Format="mcc"/>
+  <time Range="24240-1224000"/>
+  <cacheTimePerFrame TimePerFrame="240"/>
+  <cacheVersion Version="2.0"/>
+  <extra>C:/workspace/SHOT_01_[2014-12-22](18,40,8).ma</extra>
+  <extra>maya 2013 x64</extra>
+  <extra>Andrewwillish</extra>
+  <Channels>
+    <channel0 ChannelName="p_testObject:pCubeShape1" ChannelType="DoubleVectorArray" ChannelInterpretation="positions" SamplingType="Regular" SamplingRate="240" StartTime="24240" EndTime="1224000"/>
+  </Channels>
+</Autodesk_Cache_File>

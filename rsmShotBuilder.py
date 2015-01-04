@@ -110,15 +110,16 @@ class shotBuilderCls:
 
         repVar=cmds.confirmDialog(icn='question',t='Select Sub-Type',m='Please select asset sub-type:',\
                                   button=['model','shader','rig','Cancel'])
-        assetRefPath=assetRefPath+'/'+repVar
+        assetRefPath = assetRefPath+'/'+repVar
 
         if repVar!='Cancel':
             if os.path.isdir(assetRefPath):
-                for chk in os.listdir(assetRefPath):assetRefPath=chk if chk.endswith('.ma')==True else None
+                for chk in os.listdir(assetRefPath):filename = chk if chk.endswith('.ma') is True else None
 
-                if assetRefPath!=None:
-                    filename=assetRefPath[assetRefPath.rfind('/')+1:]
-                    refAss=cmds.file(assetRefPath,loadReferenceDepth='all',namespace=filename[:-3],r=True,f=True,mnc=False,gr=True)
+                if filename is not None:
+                    print filename
+                    print assetRefPath
+                    refAss=cmds.file(assetRefPath+'/'+filename,loadReferenceDepth='all',namespace=filename[:-3],r=True,f=True,mnc=False,gr=True)
                     curimp=cmds.ls(sl=True)[0]
                     if curimp.startswith('c_'):
                         cmds.parent(curimp,'char')

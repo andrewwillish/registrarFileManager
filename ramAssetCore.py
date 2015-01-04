@@ -474,6 +474,16 @@ def uploadAsset(name=None, assetType=None, assetTarget=None):
         cmds.file(rename=serverFileSavePathVar)
         cmds.file(save=True, f=True)
 
+    #additional to
+    if assetTarget == 'shader':
+        item = cmds.ls(type='mesh')
+        root = ET.Element('root')
+        for chk in item:
+            tagWrite = ET.SubElement(root, chk)
+            tagWrite.text = chk
+        tree = ET.ElementTree(root)
+        tree.write(str(assetRootVar)+'/'+str(assetType)+'/'+str(name)+'/'+str(assetTarget)+'/conData.xml')
+
     #reopen local file
     cmds.file(localFileSavePathVar,o=True,f=True)
 
@@ -486,7 +496,7 @@ def downloadAsset(name=None, assetType=None, assetTarget=None):
     if name==None:raise StandardError, 'error : no asset name specified'
     if assetType==None or assetTarget==None: raise StandardError, 'error : no asset type or target specified'
     if assetTarget==None or assetTarget=='': raise StandardError, 'error : no asset target specified'
-    print 'tessssssssssssssssssst'
+
     #parsing type [0]=CHAR [1]=PROP [2]=SETS
     if assetType==0:
         assetType='CHAR'
