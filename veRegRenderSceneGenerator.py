@@ -51,7 +51,7 @@ class mncRegRenderSceneGenerator:
         cmds.columnLayout(adj=True)
         cmds.textScrollList('serverMccData2',w=200, h=100, ams=True, en=False)
 
-        f3 = cmds.frameLayout(l='Exported MCC Data', p=cmas)
+        f3 = cmds.frameLayout(l='Camera', p=cmas)
         cmds.columnLayout(adj=True)
         cmds.checkBox('includeCamera', l='Include Scene Camera', v=0)
 

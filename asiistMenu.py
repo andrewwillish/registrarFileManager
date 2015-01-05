@@ -21,11 +21,16 @@ try:
 except:
     pass
 
-cmds.menuItem('assetManager',l='Asset Manager',p='m_registrarMenu',\
-              c=lambda*args: moduleLauncher('assetManager',rootPathVar+'/ramAssetUI.py'))
+cmds.menuItem('assetManager',l='Asset Browser',p='m_registrarMenu',\
+              c=lambda*args: moduleLauncher('assetManager',rootPathVar+'/veRegAssetManager.py'))
+cmds.menuItem('seqManager', l='Shot Manager', sm=True, p='m_registrarMenu')
+cmds.menuItem('seqUpload',l='Shot Upload',p='seqManager',\
+              c=lambda*args: moduleLauncher('assetManager',rootPathVar+'/veRegSeqUpload.py'))
+cmds.menuItem('seqBrowser',l='Shot Browser',p='seqManager',\
+              c=lambda*args: moduleLauncher('assetManager',rootPathVar+'/veRegSeqBrowser.py'))
 cmds.menuItem(divider=True)
 cmds.menuItem('shotSetup',l='Shot Setup',p='m_registrarMenu',\
-              c=lambda*args: moduleLauncher('assetManager',rootPathVar+'/rsmShotSetup.py'))
+              c=lambda*args: moduleLauncher('assetManager',rootPathVar+'/veRegSeqSetup.py'))
 cmds.menuItem('shotBuilder',l='Shot Builder',p='m_registrarMenu',\
-              c=lambda*args: moduleLauncher('assetManager',rootPathVar+'/rsmShotBuilder.py'))
+              c=lambda*args: moduleLauncher('assetManager',rootPathVar+'/veRegSeqBuilder.py'))
 cmds.menuItem(divider=True)

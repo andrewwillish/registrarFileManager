@@ -135,7 +135,6 @@ class mncRegRenderSceneManager:
         veRegCore.exportMcc(dataPath=filePath)
 
         cmds.confirmDialog(icn='information', t='Done', m='MCC exported.', button=['OK'])
-
         self.refresh()
         return
 
