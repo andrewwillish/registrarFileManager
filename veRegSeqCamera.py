@@ -76,12 +76,12 @@ class rsmCamRigCls:
         return
 
     def createCamera(self, *args):
-        if cmds.objExists('shotMaster')==False:
+        if not cmds.objExists('shotMaster'):
             cmds.confirmDialog( icon='warning',title='Message', message='No Shot master within the file!',\
                                 button=['Ok'] ,defaultButton='Ok' )
             cmds.error('error: no shot master within the scene')
 
-        if cmds.objExists('cam')==True:
+        if cmds.objExists('cam'):
             cmds.confirmDialog( icon='warning',title='Error', message='There is already a camera master in scene \
             file.', button=['Ok'] ,defaultButton='Ok' )
             cmds.error('error: no shot master within the scene')
@@ -110,6 +110,20 @@ class rsmCamRigCls:
         cmds.setAttr('CAMPOS.visibility',k=False,l=True)
         cmds.group('CAMPOS',n='cam')
         self.lockStandard('cam')
+
+        prjCode = cmds.getAttr('sceneInfo.projCode', asString=True)
+        episode = cmds.getAttr('sceneInfo.episodeName', asString=True)
+        shot = cmds.getAttr('sceneInfo.shotName', asString=True)
+        cmds.annotate('shotCAM', p=(0.800, 0.511, -2.514))
+        cmds.setAttr('annotationShape1.overrideEnabled',1)
+        cmds.setAttr('annotationShape1.overrideColor',7)
+        cmds.setAttr('annotationShape1.displayArrow', 0, l=True)
+        cmds.setAttr('annotationShape1.overrideEnabled',1)
+        cmds.setAttr('annotationShape1.overrideColor',7)
+        cmds.rename('annotation1','anShotInformation')
+        cmds.expression(n='cameraex2',o='anShotInformation',s='setAttr -type\
+         "string" "anShotInformation.text" ("Scene: "+"'+prjCode+'_'+episode+'_'+shot+'");')
+        cmds.parent('anShotInformation', 'CAMGRP')
 
         #CAM SETTING================================================================================================
         cmds.group(em=True,n='CAMSET')

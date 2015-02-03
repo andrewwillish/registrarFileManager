@@ -162,7 +162,7 @@ def exportMcc(dataPath=None):
 
     #export mcc file to server
     if not os.path.isdir(sequnceDataPath+'/render/'+assetNameSpace): os.makedirs(sequnceDataPath+'/render/'+assetNameSpace)
-    cmds.cacheFile(f=assetNameSpace, dir=sequnceDataPath+'/render/'+assetNameSpace, st=101, et=int(endTime), fm='OneFile', points=cmds.ls(sl=True))
+    cmds.cacheFile(f=assetNameSpace, dir=sequnceDataPath+'/render/'+assetNameSpace, st=101, et=int(endTime), fm='OneFile', points=cmds.ls(sl=True), sch=True)
     openVar = open(sequnceDataPath+'/render/'+assetNameSpace+'/filePath.txt', 'w')
     openVar.write(assetPath)
     openVar.close()
