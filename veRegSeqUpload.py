@@ -13,9 +13,8 @@ class rsmSequenceUploadUI:
         return
 
     def uploadSeq(self):
-        veRegCore.uploadSeq()
         try:
-            print 'test'
+            veRegCore.uploadSeq()
         except Exception as e:
             cmds.confirmDialog(icn='warning',t='Error',m=str(e),button=['Ok'])
         return

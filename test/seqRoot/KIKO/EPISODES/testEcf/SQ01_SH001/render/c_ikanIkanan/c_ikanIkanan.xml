@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Autodesk_Cache_File>
+  <cacheType Type="OneFile" Format="mcc"/>
+  <time Range="24240-57840"/>
+  <cacheTimePerFrame TimePerFrame="240"/>
+  <cacheVersion Version="2.0"/>
+  <extra>C:/workspace/SQ01_SH001_[2015-2-18](10,44,11).ma</extra>
+  <extra>maya 2013 x64</extra>
+  <extra>andrew.willis</extra>
+  <Channels>
+    <channel0 ChannelName="c_ikanIkanan:downTeeth_MSHShape" ChannelType="DoubleVectorArray" ChannelInterpretation="positions" SamplingType="Regular" SamplingRate="240" StartTime="24240" EndTime="57840"/>
+    <channel1 ChannelName="c_ikanIkanan:eyeL_MSHShape" ChannelType="DoubleVectorArray" ChannelInterpretation="positions" SamplingType="Regular" SamplingRate="240" StartTime="24240" EndTime="57840"/>
+    <channel2 ChannelName="c_ikanIkanan:eyeR_MSHShape" ChannelType="DoubleVectorArray" ChannelInterpretation="positions" SamplingType="Regular" SamplingRate="240" StartTime="24240" EndTime="57840"/>
+    <channel3 ChannelName="c_ikanIkanan:ikan_lola_MSH" ChannelType="DoubleVectorArray" ChannelInterpretation="positions" SamplingType="Regular" SamplingRate="240" StartTime="24240" EndTime="57840"/>
+    <channel4 ChannelName="c_ikanIkanan:tongue_MSHShape" ChannelType="DoubleVectorArray" ChannelInterpretation="positions" SamplingType="Regular" SamplingRate="240" StartTime="24240" EndTime="57840"/>
+    <channel5 ChannelName="c_ikanIkanan:upTeeth_MSHShape" ChannelType="DoubleVectorArray" ChannelInterpretation="positions" SamplingType="Regular" SamplingRate="240" StartTime="24240" EndTime="57840"/>
+  </Channels>
+</Autodesk_Cache_File>

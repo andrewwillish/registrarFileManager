@@ -94,7 +94,7 @@ class rsmCamRigCls:
         #CREATE CAMERA==============================================================================================
 
         self.lockStandard('shotCAM')
-        cmds.setAttr('shotCAM./visibility',l=True)
+        cmds.setAttr('shotCAM.visibility',l=True)
         cmds.group(n='CAMGRP', em=True)
         self.lockStandard('CAMGRP')
         cmds.setAttr('CAMGRP.visibility',k=False,l=True)
