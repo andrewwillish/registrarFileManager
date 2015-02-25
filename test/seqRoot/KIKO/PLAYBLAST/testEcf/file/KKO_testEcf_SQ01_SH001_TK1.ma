@@ -1,5 +1,5 @@
 //Maya ASCII 2013ff10 scene
-//Name: SQ01_SH001.ma
+//Name: SQ01_SH001_[2015-2-25](9,25,32).ma
 //Last modified: Wed, Feb 25, 2015 11:18:08 AM
 //Codeset: 1252
 file -rdi 1 -ns "p_bolaBora" -rfn "p_bolaBoraRN" "Z:/development/veRegistrarFileManager/test/assetRoot/PROP/bolaBora/rig/p_bolaBora.ma";
@@ -1413,4 +1413,4 @@ connectAttr "c_ikanIkanan:BODY_02_CTRL_scaleX.msg" "hyperLayout1.hyp[38].dn";
 connectAttr "c_ikanIkanan:BODY_02_CTRL_scaleY.msg" "hyperLayout1.hyp[39].dn";
 connectAttr "c_ikanIkanan:BODY_02_CTRL_scaleZ.msg" "hyperLayout1.hyp[40].dn";
 connectAttr "defaultRenderLayer.msg" ":defaultRenderingList1.r" -na;
-// End of SQ01_SH001.ma
+// End of SQ01_SH001_[2015-2-25](9,25,32).ma

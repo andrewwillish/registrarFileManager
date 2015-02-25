@@ -866,47 +866,74 @@ def timestamp():
     hour = date.hour; minutes = date.minute; second = date.second
     return '['+str(year)+'-'+str(month)+'-'+str(day)+']('+str(hour)+','+str(minutes)+','+str(second)+')'
 
-#playblast function
-def playblasting(newTake=False):
+#take check
+def takeCheck():
     #fetch data from scene info
     project = cmds.getAttr('sceneInfo.projName', asString=True)
+    projectCode = cmds.getAttr('sceneInfo.projCode', asString=True)
     episode = cmds.getAttr('sceneInfo.episodeName', asString=True)
     shot = cmds.getAttr('sceneInfo.shotName', asString=True)
     frameCount = int(cmds.getAttr('sceneInfo.frameCount', asString=True))
 
-    #upload file normally
-    uploadSeq()
+    #generate general path
+    genPath = SEQUENCE_ROOT+'/'+project+'/PLAYBLAST/'+episode
+
+    searchStr = str(projectCode)+'_'+str(episode)+'_'+str(shot)+'_TK'
+
+    #create directory if not exists
+    if not os.path.isdir(genPath+'/playblast'): os.makedirs(genPath+'/playblast')
+    if not os.path.isdir(genPath+'/playblast'): os.makedirs(genPath+'/file')
+
+    playblasts = []
+    for item in os.listdir(genPath+'/playblast'):
+        if item.find(searchStr) != -1: playblasts.append(item)
+    return len(playblasts)
+
+#playblast function
+def playblasting(newTake=False, takeGen=None):
+    #validate input
+    if newTake and takeGen is not None:
+        raise ValueError, 'cannot specify takeGen with newTake set to True'
+    if not newTake and takeGen is None:
+        raise ValueError, 'takeGen is not specified'
+
+    #fetch data from scene info
+    project = cmds.getAttr('sceneInfo.projName', asString=True)
+    projectCode = cmds.getAttr('sceneInfo.projCode', asString=True)
+    episode = cmds.getAttr('sceneInfo.episodeName', asString=True)
+    shot = cmds.getAttr('sceneInfo.shotName', asString=True)
+    frameCount = int(cmds.getAttr('sceneInfo.frameCount', asString=True))
 
     #validate cam existance
     if not cmds.objExists('cam'): raise StandardError, 'No cam group exists within scene file.'
 
+    #upload file normally
+    uploadSeq()
+
     #generate general path
-    genPath=SEQUENCE_ROOT+'/'+project+'/PLAYBLAST/'+episode
+    genPath = SEQUENCE_ROOT+'/'+project+'/PLAYBLAST/'+episode
 
     #generate localTemp variable
     time = timestamp()
     localTemp = WIN_ROOT+'workspace/'+episode+'_'+shot+'_'+time+'.mov'
 
-    #generating takeGen
-    if newTake is False:
-        takeGen = str(len(os.listdir(genPath)))
-        if takeGen == '0':
-            repVar = cmds.confirmDialog(icn='question', t='No Take',\
-                                        m='There is no previous take. Would you like to add new take?',\
-                                        button=['ADD TAKE', 'CANCEL'])
-            takeGen = str(int(takeGen) + 1) if repVar != 'CANCEL' else None
-    else:
-        takeGen = str(len(os.listdir(genPath))+1)
+    #generating takeGen if user want to set new take
+    if newTake:
+        searchStr = str(projectCode)+'_'+str(episode)+'_'+str(shot)+'_TK'
+        playblasts = []
+        for item in os.listdir(genPath+'/playblast'):
+            if item.find(searchStr) != -1: playblasts.append(item)
+        takeGen = str(len(playblasts)+1)
 
     #playblasting
     if takeGen is not None:
         #impose frameCount
         cmds.playbackOptions(min=101, max=101+(int(frameCount)-1))
 
-        winpbt=cmds.window('playblaster', t='Playblast', s=False)
+        winpbt = cmds.window('playblaster', t='Playblast', s=False)
         cmds.columnLayout(w=int(PLB_RESWIDTH), h=int(PLB_RESHEIGHT))
         cmds.paneLayout(w=int(PLB_RESWIDTH), h=int(PLB_RESHEIGHT))
-        tmppnl=cmds.modelPanel(cam='shotCAM',mbv=False)
+        tmppnl = cmds.modelPanel(cam='shotCAM',mbv=False)
 
         cmds.modelEditor(cam='shotCAM', mp=tmppnl, dtx=True, j=False,\
                          ca=False, nc=False, pm=True, da='smoothShaded', lt=False)
@@ -925,18 +952,18 @@ def playblasting(newTake=False):
         cmds.deleteUI('playblaster', window=True)
 
         #playblast file operation
-        if os.path.isdir(genPath+'/'+takeGen+'/playblast') == False:os.makedirs(genPath+'/'+takeGen+'/playblast')
+        if os.path.isdir(genPath+'/playblast') == False:os.makedirs(genPath+'/playblast')
 
-        shutil.copy(localTemp, genPath+'/'+takeGen+'/playblast/'+episode+'_'+shot+'.mov')
+        shutil.copy(localTemp, genPath+'/playblast/'+projectCode+'_'+episode+'_'+shot+'_TK'+takeGen+'.mov')
         os.remove(localTemp)
 
         #save take file [continue from here]
-        if not os.path.isdir(genPath+'/'+takeGen+'/file'):os.makedirs(genPath+'/'+takeGen+'/file')
+        if not os.path.isdir(genPath+'/file'):os.makedirs(genPath+'/file')
         currentName = cmds.file(q=True, sn=True)
-        shutil.copy(currentName, genPath+'/'+takeGen+'/file/'+episode+'_'+shot+'.ma')
+        shutil.copy(currentName, genPath+'/file/'+projectCode+'_'+episode+'_'+shot+'_TK'+takeGen+'.ma')
 
         #open playblast file
-        os.startfile(genPath+'/'+takeGen+'/playblast/'+episode+'_'+shot+'.mov')
+        os.startfile(genPath+'/playblast/'+projectCode+'_'+episode+'_'+shot+'_TK'+takeGen+'.mov')
     return
 
 def viewPlayblast(eps=None, shot=None):
