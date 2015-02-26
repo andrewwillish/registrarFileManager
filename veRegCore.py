@@ -941,6 +941,7 @@ def playblasting(newTake=False, takeGen=None):
         cmds.setFocus(tmppnl)
 
         #playblasting
+        mel.eval("setDisplaySmoothness 3;")
         pc.playblast(f=localTemp,\
                      fo=True,\
                      fmt=PLB_FORMAT,\
@@ -949,6 +950,7 @@ def playblasting(newTake=False, takeGen=None):
                      qlt=100,\
                      uts=True,\
                      wh=[int(PLB_RESWIDTH)/1,int(PLB_RESHEIGHT)/1])
+        mel.eval("setDisplaySmoothness 1;")
         cmds.deleteUI('playblaster', window=True)
 
         #playblast file operation
